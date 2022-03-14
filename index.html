@@ -6,38 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REST Client</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-</head>
+    <script>
+      async function getBookings(){
+        const response = await fetch('http://localhost:5000/view_all_bookings');
+        var data = await response.json();
+        console.log(data)
+        for (let r of data['bookings']){
+          newRow=document.getElementById('resultTable').insertRow()
+          for (i=0;i<r.length;i++){
+            newRow.insertCell(i).innerHTML=r[i];
+          }
+        } 
+      }
+    </script>
+  </head>
 <body>
-
+    <button onclick="getBookings()">Get all bookings</button>
     <div class="container">
-        <table class="table">
+        <table id="resultTable" class="table">
             <thead>
               <tr>
-                <th scope="col">#id</th>
-                <th scope="col">name</th>
-                <th scope="col">username</th>
-                <th scope="col">email</th>
+                <th scope="col">booking id</th>
+                <th scope="col">date</th>
+                <th scope="col">time</th>
+                <th scope="col">pick up point</th>
+                <th scope="col">destination</th>
+                <th scope="col">longitude</th>
+                <th scope="col">latitude</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
             </tbody>
           </table>
     </div>
